@@ -1,0 +1,59 @@
+@page
+@model Zentrack.UI.Pages.Masters.RolePermissionMapping.RolePermissionMappingModel
+@{
+    ViewData["Title"] = "Role-Permission Mapping";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/assets/vendors/simple-datatables/style.css">
+}
+
+<div class="page-title">
+    <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+            <h3>Role-Permission Mapping</h3>
+            <p class="text-subtitle text-muted">Assign permissions to specific roles.</p>
+        </div>
+        <div class="col-12 col-md-6 order-md-2 order-first">
+            <div class="float-start float-lg-end mb-3">
+                <button class="btn btn-primary" id="addNewBtn">
+                    <i class="bi bi-plus"></i> Add New Mapping
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            Mapping List
+        </div>
+        <div class="card-body">
+            <table class="table table-striped" id="table1">
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Permissions</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Administrator</td>
+                        <td>All Permissions</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="~/js/masters/rolepermissionmapping.js"></script>
+}

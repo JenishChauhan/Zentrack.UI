@@ -1,0 +1,61 @@
+@page
+@model Zentrack.UI.Pages.Masters.Permission.PermissionModel
+@{
+    ViewData["Title"] = "Permission Master";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/assets/vendors/simple-datatables/style.css">
+}
+
+<div class="page-title">
+    <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+            <h3>Permission Master</h3>
+            <p class="text-subtitle text-muted">Manage system permissions and access levels.</p>
+        </div>
+        <div class="col-12 col-md-6 order-md-2 order-first">
+            <div class="float-start float-lg-end mb-3">
+                <button class="btn btn-primary" id="addNewBtn">
+                    <i class="bi bi-plus"></i> Add New Permission
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            Permission List
+        </div>
+        <div class="card-body">
+            <table class="table table-striped" id="table1">
+                <thead>
+                    <tr>
+                        <th>Permission Name</th>
+                        <th>Code</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>View Dashboard</td>
+                        <td>VIEW_DASHBOARD</td>
+                        <td>Allows viewing the main dashboard</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="~/js/masters/permission.js"></script>
+}

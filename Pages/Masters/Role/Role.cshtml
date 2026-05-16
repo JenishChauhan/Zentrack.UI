@@ -1,0 +1,61 @@
+@page
+@model Zentrack.UI.Pages.Masters.Role.RoleModel
+@{
+    ViewData["Title"] = "Role Master";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/assets/vendors/simple-datatables/style.css">
+}
+
+<div class="page-title">
+    <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+            <h3>Role Master</h3>
+            <p class="text-subtitle text-muted">Manage system roles and permissions.</p>
+        </div>
+        <div class="col-12 col-md-6 order-md-2 order-first">
+            <div class="float-start float-lg-end mb-3">
+                <button class="btn btn-primary" id="addNewBtn">
+                    <i class="bi bi-plus"></i> Add New Role
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            Role List
+        </div>
+        <div class="card-body">
+            <table class="table table-striped" id="table1">
+                <thead>
+                    <tr>
+                        <th>Role Name</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Administrator</td>
+                        <td>Full access to all modules</td>
+                        <td><span class="badge bg-success">Active</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="~/js/masters/role.js"></script>
+}

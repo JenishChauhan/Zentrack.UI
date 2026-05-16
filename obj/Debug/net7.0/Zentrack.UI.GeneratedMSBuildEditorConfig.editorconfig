@@ -1,0 +1,97 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Zentrack.UI
+build_property.RootNamespace = Zentrack.UI
+build_property.ProjectDir = D:\Projects\Zentrack.UI\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
+build_property.MSBuildProjectDirectory = D:\Projects\Zentrack.UI
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/Projects/Zentrack.UI/Pages/Auth/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Auth/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Masters/Driver/Driver.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyc1xEcml2ZXJcRHJpdmVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Masters/GstTds/GstTds.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyc1xHc3RUZHNcR3N0VGRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Masters/Item/Item.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyc1xJdGVtXEl0ZW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Masters/Location/Location.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyc1xMb2NhdGlvblxMb2NhdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Masters/Party/Party.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyc1xQYXJ0eVxQYXJ0eS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Masters/Permission/Permission.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyc1xQZXJtaXNzaW9uXFBlcm1pc3Npb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Masters/Registration/Registration.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyc1xSZWdpc3RyYXRpb25cUmVnaXN0cmF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Masters/RolePermissionMapping/RolePermissionMapping.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyc1xSb2xlUGVybWlzc2lvbk1hcHBpbmdcUm9sZVBlcm1pc3Npb25NYXBwaW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Masters/Role/Role.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyc1xSb2xlXFJvbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Masters/User/User.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyc1xVc2VyXFVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Masters/Vehicle/Vehicle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyc1xWZWhpY2xlXFZlaGljbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Zentrack.UI/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-njt4vsd3nn
