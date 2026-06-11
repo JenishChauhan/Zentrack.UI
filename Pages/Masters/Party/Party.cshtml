@@ -4,10 +4,6 @@
     ViewData["Title"] = "Party Master";
 }
 
-@section Styles {
-    <link rel="stylesheet" href="~/assets/vendors/simple-datatables/style.css">
-}
-
 <div class="page-title">
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
@@ -26,36 +22,151 @@
 
 <section class="section">
     <div class="card">
-        <div class="card-header">
-            Party List
-        </div>
+        <div class="card-header">Party List</div>
         <div class="card-body">
-            <table class="table table-striped" id="table1">
-                <thead>
-                    <tr>
-                        <th>Party Name</th>
-                        <th>Type</th>
-                        <th>Contact</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>ABC Corp</td>
-                        <td>Vendor</td>
-                        <td>9998887776</td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <!-- Top controls: page size + search -->
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-2">
+                    <label class="mb-0 text-nowrap">Show</label>
+                    <select id="pageSizeSelect" class="form-select form-select-sm" style="width:80px;">
+                        <option value="10" selected>10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <label class="mb-0 text-nowrap">entries</label>
+                </div>
+                <div>
+                    <input type="text" id="gridSearch" class="form-control form-control-sm"
+                           placeholder="Search by name, type, GST, contact, mobile..."
+                           style="width:320px;" autocomplete="off" />
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-responsive">
+                <table class="table table-striped table-hover mb-2" id="table1">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Party Name</th>
+                            <th>Type</th>
+                            <th>GST No</th>
+                            <th>Contact Person</th>
+                            <th>Mobile</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="partyTableBody">
+                        <tr><td colspan="8" class="text-center">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Bottom controls: info + pagination -->
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-2">
+                <div id="gridInfo" class="text-muted small"></div>
+                <ul class="pagination pagination-sm mb-0" id="pagination"></ul>
+            </div>
+
         </div>
     </div>
 </section>
 
+<!-- Party Modal -->
+<div class="modal fade" id="partyModal" tabindex="-1" aria-labelledby="partyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="partyModalLabel">Add New Party</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="partyForm" novalidate>
+                    <input type="hidden" id="partyID" />
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="partyName" class="form-label">Party Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="partyName" maxlength="100" placeholder="Enter party name" />
+                            <div class="invalid-feedback" id="partyNameError"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="partyType" class="form-label">Party Type</label>
+                            <select class="form-select" id="partyType">
+                                <option value="">-- Select Type --</option>
+                                <option value="Consignor">Consignor</option>
+                                <option value="Consignee">Consignee</option>
+                                <option value="Transporter">Transporter</option>
+                                <option value="Agent">Agent</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="gstNo" class="form-label">GST No</label>
+                            <input type="text" class="form-control" id="gstNo" maxlength="15" placeholder="e.g. 22AAAAA0000A1Z5" />
+                            <div class="invalid-feedback" id="gstNoError"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="panNo" class="form-label">PAN No</label>
+                            <input type="text" class="form-control" id="panNo" maxlength="10" placeholder="e.g. AAAAA9999A" />
+                            <div class="invalid-feedback" id="panNoError"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="contactPerson" class="form-label">Contact Person</label>
+                            <input type="text" class="form-control" id="contactPerson" maxlength="100" placeholder="Enter contact person name" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="mobileNo" class="form-label">Mobile No</label>
+                            <input type="text" class="form-control" id="mobileNo" maxlength="15" placeholder="Enter mobile number" />
+                            <div class="invalid-feedback" id="mobileNoError"></div>
+                        </div>
+                        <div class="col-12">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" rows="3" placeholder="Enter full address"></textarea>
+                        </div>
+                        <div class="col-md-6 d-none" id="isActiveWrapper">
+                            <label class="form-label">Status</label>
+                            <div class="form-check form-switch mt-1">
+                                <input class="form-check-input" type="checkbox" id="isActive" checked />
+                                <label class="form-check-label" for="isActive">Active</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="modalAlert" class="alert alert-danger mt-3 d-none"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="savePartyBtn">
+                    <span id="saveBtnSpinner" class="spinner-border spinner-border-sm d-none me-1" role="status"></span>
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong id="deletePartyName"></strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger btn-sm" id="confirmDeleteBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
-    <script src="~/assets/vendors/simple-datatables/simple-datatables.js"></script>
     <script src="~/js/masters/party.js"></script>
 }
