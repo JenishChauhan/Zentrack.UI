@@ -4,10 +4,6 @@
     ViewData["Title"] = "Location Master";
 }
 
-@section Styles {
-    <link rel="stylesheet" href="~/assets/vendors/simple-datatables/style.css">
-}
-
 <div class="page-title">
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
@@ -26,38 +22,131 @@
 
 <section class="section">
     <div class="card">
-        <div class="card-header">
-            Location List
-        </div>
+        <div class="card-header">Location List</div>
         <div class="card-body">
-            <table class="table table-striped" id="table1">
-                <thead>
-                    <tr>
-                        <th>Location Name</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Main Office</td>
-                        <td>New York</td>
-                        <td>NY</td>
-                        <td><span class="badge bg-success">Active</span></td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <!-- Top controls: page size + search -->
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-2">
+                    <label class="mb-0 text-nowrap">Show</label>
+                    <select id="pageSizeSelect" class="form-select form-select-sm" style="width:80px;">
+                        <option value="10" selected>10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <label class="mb-0 text-nowrap">entries</label>
+                </div>
+                <div>
+                    <input type="text" id="gridSearch" class="form-control form-control-sm"
+                           placeholder="Search by name, city, state, county..."
+                           style="width:320px;" autocomplete="off" />
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-responsive">
+                <table class="table table-striped table-hover mb-2" id="table1">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Location Name</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>County</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="locationTableBody">
+                        <tr><td colspan="7" class="text-center">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Bottom controls: info + pagination -->
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-2">
+                <div id="gridInfo" class="text-muted small"></div>
+                <ul class="pagination pagination-sm mb-0" id="pagination"></ul>
+            </div>
+
         </div>
     </div>
 </section>
 
+<!-- Location Modal -->
+<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="locationModalLabel">Add New Location</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="locationForm" novalidate>
+                    <input type="hidden" id="locationID" />
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="locationName" class="form-label">Location Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="locationName" maxlength="100" placeholder="Enter location name" />
+                            <div class="invalid-feedback" id="locationNameError"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="city" maxlength="50" placeholder="Enter city" />
+                            <div class="invalid-feedback" id="cityError"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="state" class="form-label">State</label>
+                            <input type="text" class="form-control" id="state" maxlength="50" placeholder="Enter state" />
+                            <div class="invalid-feedback" id="stateError"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="county" class="form-label">County</label>
+                            <input type="text" class="form-control" id="county" maxlength="50" placeholder="Enter county" />
+                            <div class="invalid-feedback" id="countyError"></div>
+                        </div>
+                        <div class="col-md-6 d-none" id="isActiveWrapper">
+                            <label class="form-label">Status</label>
+                            <div class="form-check form-switch mt-1">
+                                <input class="form-check-input" type="checkbox" id="isActive" checked />
+                                <label class="form-check-label" for="isActive">Active</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="modalAlert" class="alert alert-danger mt-3 d-none"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveLocationBtn">
+                    <span id="saveBtnSpinner" class="spinner-border spinner-border-sm d-none me-1" role="status"></span>
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong id="deleteLocationName"></strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger btn-sm" id="confirmDeleteBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
-    <script src="~/assets/vendors/simple-datatables/simple-datatables.js"></script>
     <script src="~/js/masters/location.js"></script>
 }
